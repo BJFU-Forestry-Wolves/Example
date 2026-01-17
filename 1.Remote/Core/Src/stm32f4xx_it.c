@@ -207,19 +207,19 @@ void TIM6_DAC_IRQHandler(void)
 
 /* USER CODE BEGIN 1 */
 /**
-  * @brief      �ú��������ж��Ƿ��ǿ����жϣ�����it.c�ļ��е�uart3���жϻص�������
+  * @brief      该函数用于判断是否是空闲中断，放在it.c文件中的uart3的中断回调函数中
   * @param      huart: uart IRQHandler id
   * @retval     NULL
   */
 void Uart_RxIdleCallback(UART_HandleTypeDef* huart) {
 	
-			/*	�ж��Ƿ��ǿ����жϣ����ж��ж�Դ	*/
+			/*	判断是否是空闲中断，并判断中断源	*/
 		if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) && __HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE)) {
 				
-			/* ��������жϵı�־λ */
+			/* 清除空闲中断的标志位 */
 				__HAL_UART_CLEAR_IDLEFLAG(huart);
 			
-			/* ����ң�������յ������� */		
+			/* 处理遥控器接收到的数捿 */		
 				Remote_RXCallback(huart);
 		}
 

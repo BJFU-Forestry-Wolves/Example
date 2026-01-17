@@ -6,8 +6,8 @@
   ******************************************************************************
   * @attention
   *
-  * Õâ¸öÎÄ¼şÀïÃæÊÇ¸÷¸öÖĞ¶ÏµÄ»Øµ÷´¦Àíº¯Êı£¬°üÀ¨ÁËuartºÍCANÖĞ¶Ï
-  * ÖĞ¶ÏÖ±½ÓÔÚÕâ¸öÎÄ¼şÀïÃæ¸Ä¾Í¿ÉÒÔÁË
+  * è¿™ä¸ªæ–‡ä»¶é‡Œé¢æ˜¯å„ä¸ªä¸­æ–­çš„å›è°ƒå¤„ç†å‡½æ•°ï¼ŒåŒ…æ‹¬äº†uartå’ŒCANä¸­æ–­
+  * ä¸­æ–­ç›´æ¥åœ¨è¿™ä¸ªæ–‡ä»¶é‡Œé¢æ”¹å°±å¯ä»¥äº†
   * 
   * 
   *
@@ -235,19 +235,19 @@ void CAN2_RX0_IRQHandler(void)
 
 /* USER CODE BEGIN 1 */
 /**
-  * @brief      ¸Ãº¯ÊıÓÃÓÚÅĞ¶ÏÊÇ·ñÊÇ¿ÕÏĞÖĞ¶Ï£¬·ÅÔÚit.cÎÄ¼şÖĞµÄuart3µÄÖĞ¶Ï»Øµ÷º¯ÊıÖĞ
+  * @brief      è¯¥å‡½æ•°ç”¨äºåˆ¤æ–­æ˜¯å¦æ˜¯ç©ºé—²ä¸­æ–­ï¼Œæ”¾åœ¨it.cæ–‡ä»¶ä¸­çš„uart3çš„ä¸­æ–­å›è°ƒå‡½æ•°ä¸­
   * @param      huart: uart IRQHandler id
   * @retval     NULL
   */
 void Uart_RxIdleCallback(UART_HandleTypeDef* huart) {
 	
-			/*	ÅĞ¶ÏÊÇ·ñÊÇ¿ÕÏĞÖĞ¶Ï£¬²¢ÅĞ¶ÏÖĞ¶ÏÔ´	*/
+			/*	åˆ¤æ–­æ˜¯å¦æ˜¯ç©ºé—²ä¸­æ–­ï¼Œå¹¶åˆ¤æ–­ä¸­æ–­æº	*/
 		if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) && __HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE)) {
 				
-			/* Çå³ı¿ÕÏĞÖĞ¶ÏµÄ±êÖ¾Î» */
+			/* æ¸…é™¤ç©ºé—²ä¸­æ–­çš„æ ‡å¿—ä½ */
 				__HAL_UART_CLEAR_IDLEFLAG(huart);
 			
-			/* ´¦ÀíÒ£¿ØÆ÷½ÓÊÕµ½µÄÊı¾İ */		
+			/* å¤„ç†é¥æ§å™¨æ¥æ”¶åˆ°çš„æ•°æ® */		
 				Remote_RXCallback(huart);
 		}
 
@@ -259,28 +259,28 @@ void Uart_RxIdleCallback(UART_HandleTypeDef* huart) {
 
 
 /**
- * @brief        	ÒÔÏÂÁ½¸öº¯Êı¶¼ÊÇCAN×ÜÏßÉÏ½ÓÊÕµ½Êı¾İºóµÄÖĞ¶Ï»Øµ÷£¬·Ö±ğ´¦Àífifo0ºÍfifo1ÖĞµÄÊı¾İ£¬±¾ÖÊÉÏ¾ÍÊÇ¸ö½ÓÊÕÖĞ¶Ï£¬Ã»ÓĞÇø±ğ
- * @param 				×¢Òâ£¬HAL_CAN_GetRxMessage()º¯ÊıÓÃµ½µÄ±äÁ¿¶¼ÔÚbsp_can.cÎÄ¼şÀïÃæ¶¨ÒåµÄ£¬ĞèÒª°üº¬bsp_can.hÎÄ¼ş
+ * @brief        	ä»¥ä¸‹ä¸¤ä¸ªå‡½æ•°éƒ½æ˜¯CANæ€»çº¿ä¸Šæ¥æ”¶åˆ°æ•°æ®åçš„ä¸­æ–­å›è°ƒï¼Œåˆ†åˆ«å¤„ç†fifo0å’Œfifo1ä¸­çš„æ•°æ®ï¼Œæœ¬è´¨ä¸Šå°±æ˜¯ä¸ªæ¥æ”¶ä¸­æ–­ï¼Œæ²¡æœ‰åŒºåˆ«
+ * @param 				æ³¨æ„ï¼ŒHAL_CAN_GetRxMessage()å‡½æ•°ç”¨åˆ°çš„å˜é‡éƒ½åœ¨bsp_can.cæ–‡ä»¶é‡Œé¢å®šä¹‰çš„ï¼Œéœ€è¦åŒ…å«bsp_can.hæ–‡ä»¶
  * @param         [CAN_HandleTypeDef] *phcan
- * @param					HAL_CAN_GetRxMessage()º¯Êı'CAN_RxHeaderTypeDef *'ÊÇÒ»¸ö½á¹¹ÌåÖ¸Õë£¬¸Ã½á¹¹Ìå½«´æ´¢½ÓÊÕµ½µÄ CAN Ö¡µÄÍ·²¿ĞÅÏ¢¡£Í·²¿ĞÅÏ¢°üÀ¨±êÊ¶·û¡¢Ö¡ÀàĞÍ¡¢Êı¾İ³¤¶ÈµÈÊı¾İ
+ * @param					HAL_CAN_GetRxMessage()å‡½æ•°'CAN_RxHeaderTypeDef *'æ˜¯ä¸€ä¸ªç»“æ„ä½“æŒ‡é’ˆï¼Œè¯¥ç»“æ„ä½“å°†å­˜å‚¨æ¥æ”¶åˆ°çš„ CAN å¸§çš„å¤´éƒ¨ä¿¡æ¯ã€‚å¤´éƒ¨ä¿¡æ¯åŒ…æ‹¬æ ‡è¯†ç¬¦ã€å¸§ç±»å‹ã€æ•°æ®é•¿åº¦ç­‰æ•°æ®
  * @return        [type]
  */
 
 
 void HAL_CAN_RxFifo1MsgPendingCallback(CAN_HandleTypeDef *phcan) {
-			/* ¶ÁÈ¡CAN×ÜÏßFIFO1»º´æÇøµÄÊı¾İ£¬½«Êı¾İ×ªÒÆµ½Can_RxDataÖĞ */
+			/* è¯»å–CANæ€»çº¿FIFO1ç¼“å­˜åŒºçš„æ•°æ®ï¼Œå°†æ•°æ®è½¬ç§»åˆ°Can_RxDataä¸­ */
     uint32_t ret = HAL_CAN_GetRxMessage(phcan, CAN_RX_FIFO1, &Can_RxHeader, Can_RxData);
     if (ret != HAL_OK) {
-			/* Ğ£ÑéÊÇ·ñÓĞ´íÎó£¬ÓĞÔòÖ´ĞĞÒÔÏÂº¯Êı°Ñ´íÎó½á¹û·¢ËÍµ½´®¿Ú(Êµ¼ÊÉÏ»¹Ã»Ğ´´®¿Ú) */
+			/* æ ¡éªŒæ˜¯å¦æœ‰é”™è¯¯ï¼Œæœ‰åˆ™æ‰§è¡Œä»¥ä¸‹å‡½æ•°æŠŠé”™è¯¯ç»“æœå‘é€åˆ°ä¸²å£(å®é™…ä¸Šè¿˜æ²¡å†™ä¸²å£) */
         Can_ErrorHandler(ret);
     }
-			/*	¶ÔCan_RxDataÖĞµÄÊı¾İ´¦Àí	*/
+			/*	å¯¹Can_RxDataä¸­çš„æ•°æ®å¤„ç†	*/
     Can_RxMessageCallback(phcan, &Can_RxHeader, Can_RxData);
 }
 
 
 void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *phcan) {
-		/* ¶ÁÈ¡CAN×ÜÏßFIFO0»º´æÇøµÄÊı¾İ */
+		/* è¯»å–CANæ€»çº¿FIFO0ç¼“å­˜åŒºçš„æ•°æ® */
     uint32_t ret = HAL_CAN_GetRxMessage(phcan, CAN_RX_FIFO0, &Can_RxHeader, Can_RxData);
     if (ret != HAL_OK) {
         Can_ErrorHandler(ret);

@@ -2,9 +2,9 @@
  *  Project      : 
  * 
  *  file         : app_remote.h
- *  Description  : ±¾ÎÄ¼şÓÃÀ´´¦ÀíÒ£¿ØÆ÷Ïß³Ì
+ *  Description  : æœ¬æ–‡ä»¶ç”¨æ¥å¤„ç†é¥æ§å™¨çº¿ç¨‹
  *  LastEditors  : Lee
- *  Date         : 2024Äê8ÔÂ25ÈÕ22:14:49
+ *  Date         : 2024å¹´8æœˆ25æ—¥22:14:49
  *  LastEditTime : 
  */
 

@@ -2,9 +2,9 @@
  *  Project      : 
  * 
  *  file         : app_remote.c
- *  Description  : ±¾ÎÄ¼şÓÃÀ´´¦ÀíÒ£¿ØÆ÷Ïß³Ì
+ *  Description  : æœ¬æ–‡ä»¶ç”¨æ¥å¤„ç†é¥æ§å™¨çº¿ç¨‹
  *  LastEditors  : Lee
- *  Date         : 2024Äê8ÔÂ25ÈÕ22:14:49
+ *  Date         : 2024å¹´8æœˆ25æ—¥22:14:49
  *  LastEditTime : 
  */
 
@@ -35,7 +35,7 @@ void Remote_Task(void const * argument) {
 
 
 /**
-* @brief      Ò£¿ØÆ÷¿ØÖÆÇĞ»»
+* @brief      é¥æ§å™¨æ§åˆ¶åˆ‡æ¢
 * @param      NULL
 * @retval     NULL
 */
@@ -45,10 +45,10 @@ void Remote_ControlCom() {
 		testdata = data;
 
     switch (data->remote.s[0]) {
-		/*	ÓÒ²à²¦¸Ë£¬Ñ¡ÔñÄ£Ê½		*/
+		/*	å³ä¾§æ‹¨æ†ï¼Œé€‰æ‹©æ¨¡å¼		*/
 			
         case Remote_SWITCH_UP: {
-            /* ²¦¸ËÏòÉÏ£¬Ñ¡Ôñµ×ÅÌ¿ØÖÆÄ£Ê½ */
+            /* æ‹¨æ†å‘ä¸Šï¼Œé€‰æ‹©åº•ç›˜æ§åˆ¶æ¨¡å¼ */
             Remote_ChissisProcess();
             break;
         }
@@ -65,8 +65,8 @@ void Remote_ControlCom() {
 
 
 /**
-* @brief      Ò£¿ØÆ÷¿ØÖÆµ×ÅÌ
-* @param      ±¾º¯ÊıÖÇÄÜ¿ØÖÆµ×ÅÌ£¬ÓÃÓÚÀı³ÌÑİÊ¾£¬²»»áÔÚÊµ¼ÊÖĞÊ¹ÓÃµ½£¬¿ÉÉ¾³ı
+* @brief      é¥æ§å™¨æ§åˆ¶åº•ç›˜
+* @param      æœ¬å‡½æ•°æ™ºèƒ½æ§åˆ¶åº•ç›˜ï¼Œç”¨äºä¾‹ç¨‹æ¼”ç¤ºï¼Œä¸ä¼šåœ¨å®é™…ä¸­ä½¿ç”¨åˆ°ï¼Œå¯åˆ é™¤
 * @retval     NULL
 */
 void Remote_ChissisProcess() {
@@ -75,24 +75,24 @@ void Remote_ChissisProcess() {
 
 		
     switch (data->remote.s[1]) {
-    /*	Ñ¡Ôñ×ó²àÍÆ¸Ë×´Ì¬	*/
+    /*	é€‰æ‹©å·¦ä¾§æ¨æ†çŠ¶æ€	*/
 			
         case Remote_SWITCH_UP: {
-						/*	×ó²àÍÆ¸ËÏòÉÏ£¬µ×ÅÌÏÂµç	*/
+						/*	å·¦ä¾§æ¨æ†å‘ä¸Šï¼Œåº•ç›˜ä¸‹ç”µ	*/
 						Chassis_SetChassisMode(Chassis_NULL);
 						Chassis_SetChassisRef(NULL,NULL,NULL);
             break;
         }
 				
         case Remote_SWITCH_MIDDLE: {
-						/*	×ó²àÍÆ¸Ë¾ÓÖĞ,	¿ØÖÆµ×ÅÌÔË¶¯*/
+						/*	å·¦ä¾§æ¨æ†å±…ä¸­,	æ§åˆ¶åº•ç›˜è¿åŠ¨*/
 						Chassis_SetChassisMode(Chassis_SEP);
 						Chassis_SetChassisRef((float)data->remote.ch[1]  , (float)data->remote.ch[0] , NULL);
             break;
         }
 				
         case Remote_SWITCH_DOWN: {
-            /* ×ó²àÍÆ¸ËÏòÏÂ,µç»úÏÂµç   */
+            /* å·¦ä¾§æ¨æ†å‘ä¸‹,ç”µæœºä¸‹ç”µ   */
 						Chassis_SetChassisMode(Chassis_NULL);
 						Chassis_SetChassisRef(NULL,NULL,NULL);
             break;

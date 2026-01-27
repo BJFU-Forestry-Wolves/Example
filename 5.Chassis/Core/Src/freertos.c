@@ -119,7 +119,7 @@ void MX_FREERTOS_Init(void) {
 
 /* USER CODE BEGIN Header_Remote_Task */
 /**
-  * @brief  ±¾´¦ÊÇÒ»¸öÈõ¶¨Òåº¯Êı£¬¾ßÌåº¯ÊıÎ»ÖÃÔÚapp_remote.cÖĞ
+  * @brief  æœ¬å¤„æ˜¯ä¸€ä¸ªå¼±å®šä¹‰å‡½æ•°ï¼Œå…·ä½“å‡½æ•°ä½ç½®åœ¨app_remote.cä¸­
   * @param  argument: Not used
   * @retval None
   */
@@ -137,7 +137,7 @@ __weak void Remote_Task(void const * argument)
 
 /* USER CODE BEGIN Header_Chassis_Task */
 /**
-* @brief ±¾´¦ÊÇÒ»¸öÈõ¶¨Òåº¯Êı£¬¾ßÌåº¯ÊıÎ»ÖÃÔÚapp_chissis.cÖĞ
+* @brief æœ¬å¤„æ˜¯ä¸€ä¸ªå¼±å®šä¹‰å‡½æ•°ï¼Œå…·ä½“å‡½æ•°ä½ç½®åœ¨app_chissis.cä¸­
 * @param argument: Not used
 * @retval None
 */

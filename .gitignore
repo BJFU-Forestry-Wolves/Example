@@ -49,7 +49,7 @@ JLinkLog.txt
 *.dep
 *.srec
 *.out
-*.lib
+!Src/*.lib     
 *.a
 
 # 常见构建/输出目录（避免把编译输出夹提交）
